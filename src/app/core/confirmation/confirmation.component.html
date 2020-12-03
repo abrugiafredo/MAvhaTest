@@ -5,7 +5,7 @@
     </ngb-alert>
   </div>
   <div class="d-flex flex-row justify-content-start align-items-center">
-    <div class="col-lg-7 informacion">
+    <div class="col-lg-7 information">
       <div class="d-flex justify-content-between align-items-center">
         <h3>{{reservationData.hotel.name|uppercase}}</h3>
         <ngb-rating [(rate)]="reservationData.hotel.start" [readonly]="true" [max]="5">
@@ -81,13 +81,13 @@
   </div>
   <div class="d-flex flex-row justify-content-start align-items-center my-2">
     <div class="col-lg-4">
-      <button class="btn btn-secondary btn-tamano" type="button" [routerLink]="['/review']">
+      <button class="btn btn-secondary btn-width" type="button" [routerLink]="['/review']">
         <i class="fas fa-reply"></i> Volver
       </button>
     </div>
     <div class="col-lg-2"></div>
     <div class="col-lg-4">
-      <button class="btn btn-success btn-tamano float-right" type="button" (click)="confirm()">
+      <button class="btn btn-success btn-width float-right" type="button" (click)="confirm()">
         <i class="fas fa-check"></i> Confirmar
       </button>
     </div>

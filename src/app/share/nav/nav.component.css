@@ -1,3 +1,10 @@
 .active{
   color: rgba(215, 157, 0, 0.91) !important;
 }
+.nav-font{
+  font-size: 25px;
+}
+.breadcrumb-item+.breadcrumb-item::before{
+  content: '>';
+  color: white;
+}

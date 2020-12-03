@@ -31,29 +31,29 @@
   color: #ffc100;
 }
 
-.informacion{
+.information{
 
 }
-.informacion p{
+.information p{
   margin-bottom: 0;
 }
 
-.fechas{
+.dates{
   width: 100%;
 }
-.fecha-entrada{
+.from-date{
   width: 45%;
   display: block;
 }
-.fecha-salida{
+.to-date{
   width: 45%;
   display: block;
 }
 
-.datos-ocupantes{
+.datas-occupant{
   width: 100%;
 }
 
-.text-dorado{
+.text-golden{
   color: rgba(215, 157, 0, 0.91) !important;
 }
