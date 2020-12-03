@@ -1,5 +1,5 @@
 export interface Hotel {
-  nombre:string;
+  name:string;
   description:string;
   start:number;
   adults:number;

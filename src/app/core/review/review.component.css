@@ -1,0 +1,59 @@
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+}
+.custom-day.focused {
+  background-color: #e6e6e6;
+}
+.custom-day.range, .custom-day:hover {
+  background-color: rgb(2, 117, 216);
+  color: white;
+}
+.custom-day.faded {
+  background-color: rgba(2, 117, 216, 0.5);
+}
+
+.hidden {
+  width: 0;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+.star {
+  font-size: 1.3rem;
+  color: #acacac;
+}
+.filled {
+  color: #ffc100;
+}
+
+.informacion{
+
+}
+.informacion p{
+  margin-bottom: 0;
+}
+
+.fechas{
+  width: 100%;
+}
+.fecha-entrada{
+  width: 45%;
+  display: block;
+}
+.fecha-salida{
+  width: 45%;
+  display: block;
+}
+
+.datos-ocupantes{
+  width: 100%;
+}
+
+.text-dorado{
+  color: rgba(215, 157, 0, 0.91) !important;
+}

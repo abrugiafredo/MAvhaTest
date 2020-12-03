@@ -1,1 +1,176 @@
-<p>review works!</p>
+<form novalidate>
+  <div class="d-flex flex-wrap flex-row justify-content-start align-items-center">
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="informacion">
+              <div class="d-flex justify-content-between align-items-center">
+              <h3>{{hotel.name}}</h3>
+                <ngb-rating [(rate)]="hotel.start" [readonly]="readonly" [max]="5" style="margin-right: 58px">
+                  <ng-template let-fill="fill" let-index="index">
+                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                  </ng-template>
+                </ngb-rating>
+              </div>
+              <p class="text-info">{{hotel.description}}</p>
+
+            </div>
+            <div class="imagen-hotel">
+              <img [src]="hotel.image_url" alt="" width="100" height="100">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="fechas d-flex flex-row justify-content-center align-items-center">
+            <div class="fecha-entrada">
+              <p>Fecha Entrada</p>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="hidden">
+                    <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
+                           [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2"
+                           [dayTemplate]="t" outsideDays="collapsed" [startDate]="fromDate!" [minDate]="mindate">
+                    <ng-template #t let-date let-focused="focused">
+                        <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                              [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                              (mouseleave)="hoveredDate = null">
+                            {{ date.day }}
+                        </span>
+                    </ng-template>
+                  </div>
+                  <input #dpFromDate
+                         class="form-control text-center mr-1" placeholder="dd-mm-yyyy" [disabled]="true"
+                         name="dpFromDate"
+                         [value]="formatter.format(fromDate)|date:'dd-MM-yyyy'"
+                         (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+
+                </div>
+              </div>
+            </div>
+            <div class="fecha-salida">
+              <p>Fecha Salida</p>
+              <div class="form-group">
+                <div class="input-group">
+                  <input #dpFromDate class="form-control text-center" [disabled]="true" placeholder="yyyy-mm-dd" name="dpToDate"
+                         [value]="formatter.format(toDate)|date:'dd-MM-yyyy'"
+                         (input)="toDate = validateInput(toDate, dpFromDate.value)">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="datepicker.toggle()" type="button"><i
+                      class="fas fa-calendar"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="datos-ocupantes">
+            <div class="guest d-flex justify-content-between">
+              <label for="guest">Adultos:</label>
+              <div class="input-group" style="width: 125px">
+                <div class="input-group-append">
+                  <button class="btn btn-danger " (click)="minusGuest()" [disabled]="guest==1">-</button>
+                </div>
+                <input id="guest" name="guest" class="form-control text-center h-100" [disabled]="true" type="text"
+                       [(ngModel)]="guest" [min]="1">
+                <div class="input-group-append">
+                  <button class="btn btn-primary" (click)="plusGuest()">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="child d-flex justify-content-between my-1">
+              <label for="child">Chicos:</label>
+              <div class="input-group" style="width: 125px">
+                <div class="input-group-append">
+                  <button class="btn btn-danger " (click)="minusChild()" [disabled]="childrens==0">-</button>
+                </div>
+                <input id="child" name="child" class="form-control text-center h-100" [disabled]="true" type="text"
+                       [(ngModel)]="childrens" [min]="0">
+                <div class="input-group-append">
+                  <button class="btn btn-primary" (click)="plusChild()">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="pets d-flex justify-content-between align-items-center my-1">
+              <label>¿Mascotas?</label>
+              <div class="text-center" style="width: 125px">
+                <label for="check1" class="form-check-inline">
+                  <input type="radio" class="form-check-input" name="pets" [value]="true" [(ngModel)]="pets"
+                         id="check1"> Si
+                </label>
+                <label for="check2" class="form-check-inline">
+                  <input type="radio" class="form-check-input" name="pets" [value]="false" [(ngModel)]="pets"
+                         id="check2"> No
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="card-footer" *ngIf="reservationCost.nights_cost!=0">
+          <h4>Costo de la reserva</h4>
+          <div class="d-flex justify-content-between align-items-center">
+            <p>Duracion Estadia:</p>
+            <p><b>{{devolverNoches()}} <span *ngIf="devolverNoches()>1">noches</span><span
+              *ngIf="devolverNoches()==1">noche</span></b></p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <p>Costo de la Noche:</p>
+            <p><b>{{reservationCost.nights_cost|currency}} </b></p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <p>Descuento:</p>
+            <p><b>{{reservationCost.discount|currency}} </b></p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <p>Costo de limpieza:</p>
+            <p><b>{{reservationCost.cleaning_fee|currency}} </b></p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <p>Total:</p>
+            <p class="text-danger"><b>{{reservationCost.total|currency}} </b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-header text-center bg-dark text-dorado">
+          <h4>Confirmar y Pagar</h4>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <p>Fechas:</p>
+            <p><b>{{this.formatter.format(fromDate)|date:'dd-MM-yyyy'}} al {{this.formatter.format(toDate)|date:'dd-MM-yyyy'}}</b></p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <p>Total Ocupantes:</p>
+            <p><b>{{guest + childrens}}</b></p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <p>¿Llevan Mascota?</p>
+            <p><b *ngIf="pets">Si</b><b *ngIf="!pets">No</b></p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <p>Total noches:</p>
+            <p><b>{{devolverNoches()}}</b></p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <p>Total:</p>
+            <p><b>{{this.reservationCost.total|currency}}</b></p>
+          </div>
+        </div>
+        <div class="card-footer bg-white">
+          <p>Comentario al hotel</p>
+          <textarea name="comentarios" class="w-100" rows="10" [(ngModel)]="coments">
+
+          </textarea>
+          <button type="button" class="btn btn-primary float-right" (click)="next()">Continuar <i class="fas fa-angle-right"></i></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>

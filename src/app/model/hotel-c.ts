@@ -7,7 +7,7 @@ export class HotelC {
       childrens:0,
       description:'',
       image_url:'',
-      nombre:'',
+      name:'',
       pets:false,
       start:0
     }
