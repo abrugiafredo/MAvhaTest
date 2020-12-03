@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="d-flex justify-content-center align-items-center" *ngIf="confirmation.message!=''">
+    <ngb-alert [dismissible]="false" [type]="'success'">
+      {{confirmation.message}}
+    </ngb-alert>
+  </div>
+  <div class="d-flex flex-row justify-content-start align-items-center">
+    <div class="col-lg-7 informacion">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3>{{reservationData.hotel.name|uppercase}}</h3>
+        <ngb-rating [(rate)]="reservationData.hotel.start" [readonly]="true" [max]="5">
+          <ng-template let-fill="fill" let-index="index">
+            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+          </ng-template>
+        </ngb-rating>
+      </div>
+
+      <p class="text-info text-justify">{{reservationData.hotel.description}}</p>
+
+    </div>
+    <div class="col-lg-3">
+      <img [src]="reservationData.hotel.image_url" class="float-right" alt="" width="200" height="200">
+    </div>
+  </div>
+
+  <div class="d-flex flex-row flex-wrap justify-content-start align-items-center my-2">
+    <div class="col-lg-4 card">
+      <div class="card-body">
+        <div class="d-flex flex-row justify-content-center align-items-center">
+          <h4>Datos Reserva</h4>
+        </div>
+        <div class="d-flex flex-row justify-content-between align-items-center">
+          <p>Fechas:</p>
+          <p><b>{{reservationData.stayInformation.from_date|date:'dd-MM-yyyy'}} a {{reservationData.stayInformation.to_date|date:'dd-MM-yyyy'}}</b></p>
+        </div>
+        <div class="d-flex flex-row justify-content-between align-items-center">
+          <p>Total Ocupantes:</p>
+          <p><b>{{(reservationData.stayInformation.guest + reservationData.stayInformation.childrens)}}</b></p>
+        </div>
+        <div class="d-flex flex-row justify-content-between align-items-center">
+          <p>¿Mascotas?</p>
+          <p><b *ngIf="reservationData.stayInformation.pets">Si</b><b *ngIf="!reservationData.stayInformation.pets">Si</b></p>
+        </div>
+        <div class="d-flex flex-row justify-content-start align-items-center">
+          <p>Mensaje al Hotel:</p>
+        </div>
+        <div class="d-flex flex-row justify-content-start align-items-center">
+          <p class="text-justify">{{reservationData.stayInformation.message}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-4 card">
+      <div class="card-body">
+        <div class="d-flex flex-row justify-content-center align-items-center">
+          <h4>Costos de la Reserva</h4>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <p>Duracion Estadia</p>
+          <p><b>{{returnNight()}} <span *ngIf="returnNight()>1">noches</span><span
+            *ngIf="returnNight()==1">noche</span></b></p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <p>Costo de la Noche:</p>
+          <p><b>{{reservationData.cost.nights_cost|currency}} </b></p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <p>Descuento:</p>
+          <p><b>{{reservationData.cost.discount|currency}} </b></p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <p>Costo de limpieza:</p>
+          <p><b>{{reservationData.cost.cleaning_fee|currency}} </b></p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <p>Total:</p>
+          <p class="text-danger"><b>{{reservationData.cost.total|currency}} </b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row justify-content-start align-items-center my-2">
+    <div class="col-lg-4">
+      <button class="btn btn-secondary btn-tamano" type="button" [routerLink]="['/review']">
+        <i class="fas fa-reply"></i> Volver
+      </button>
+    </div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-4">
+      <button class="btn btn-success btn-tamano float-right" type="button" (click)="confirm()">
+        <i class="fas fa-check"></i> Confirmar
+      </button>
+    </div>
+  </div>
+</div>
+

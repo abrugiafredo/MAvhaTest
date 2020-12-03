@@ -108,7 +108,7 @@ export class ReviewComponent implements OnInit,OnDestroy {
     this.childrens++;
   }
 
-  devolverNoches(){
+  returnNight(){
     if(this.fromDate&&this.toDate) {
       const diff=new Date(this.formatter.format(this.toDate)).getTime() - new Date(this.formatter.format(this.fromDate)).getTime();
       return Math.round(diff/(1000*60*60*24));
@@ -121,9 +121,9 @@ export class ReviewComponent implements OnInit,OnDestroy {
     if (this.fromDate && this.toDate) {
       let datosReserva: any = {
         hotel: this.hotel,
-        infoEstadia: {
-          fecha_entrada: new Date(this.fromDate.year, (this.fromDate.month - 1), this.fromDate.day),
-          fecha_salida: new Date(this.toDate.year, (this.toDate.month - 1), this.toDate.day),
+        stayInformation: {
+          from_date: new Date(this.fromDate.year, (this.fromDate.month - 1), this.fromDate.day),
+          to_date: new Date(this.toDate.year, (this.toDate.month - 1), this.toDate.day),
           guest: this.guest,
           childrens: this.childrens,
           pets: this.pets,

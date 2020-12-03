@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'review',
     loadChildren: () => import('./core/review/review.module').then(m => m.ReviewModule)
+  },
+  {
+    path: 'confirmation',
+    loadChildren: () => import('./core/confirmation/confirmation.module').then(m => m.ConfirmationModule)
   }
 ];
 

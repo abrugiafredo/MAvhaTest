@@ -1,0 +1,17 @@
+.star {
+  font-size: 1.3rem;
+  color: #acacac;
+}
+.filled {
+  color: #ffc100;
+}
+
+.informacion{
+
+}
+.informacion p{
+  margin-bottom: 0;
+}
+.btn-tamano{
+  width: 130px;
+}
